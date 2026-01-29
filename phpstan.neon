@@ -1,0 +1,11 @@
+parameters:
+    level: max
+    paths:
+        - src
+        - tests
+    excludePaths:
+        - vendor
+    reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        # Allow dynamic property access for config arrays
+        - '#Cannot access offset .* on mixed#'
