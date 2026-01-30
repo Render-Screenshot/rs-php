@@ -3,7 +3,6 @@
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="vendor/autoload.php"
          colors="true"
-         cacheDirectory=".phpunit.cache"
          executionOrder="depends,defects"
          beStrictAboutOutputDuringTests="true"
          failOnRisky="true"
@@ -14,13 +13,10 @@
         </testsuite>
     </testsuites>
 
-    <source>
-        <include>
-            <directory>src</directory>
-        </include>
-    </source>
-
     <coverage>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
         <report>
             <html outputDirectory="coverage"/>
             <clover outputFile="coverage.xml"/>
