@@ -263,6 +263,53 @@ try {
 }
 ```
 
+## Development
+
+### Pre-commit Hooks
+
+This project uses pre-commit hooks to prevent accidental secret leaks and ensure code quality.
+
+**Setup:**
+
+```bash
+# Install pre-commit (requires Python)
+pip install pre-commit
+
+# Install the hooks
+pre-commit install
+
+# (Optional) Run on all files
+pre-commit run --all-files
+```
+
+**What the hooks check:**
+
+- **Secret detection** - Scans for API keys, tokens, passwords, and private keys
+- **PHP syntax** - Validates PHP files compile correctly
+- **PHP-CS-Fixer** - Enforces code style (PSR-12)
+- **PHPStan** - Static analysis at level 8
+- **General hygiene** - Trailing whitespace, merge conflicts, large files
+
+**Manual secret scan:**
+
+```bash
+./.hooks/check-secrets.sh
+```
+
+### Running Tests
+
+```bash
+composer install
+composer test
+```
+
+### Code Quality
+
+```bash
+composer lint      # PHP-CS-Fixer
+composer analyse   # PHPStan level 8
+```
+
 ## Links
 
 - [Documentation](https://renderscreenshot.com/docs/sdks/php)

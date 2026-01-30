@@ -1,0 +1,47 @@
+# Gitleaks configuration for RenderScreenshot PHP SDK
+# https://github.com/gitleaks/gitleaks
+
+title = "RenderScreenshot PHP SDK Secret Detection"
+
+[extend]
+# Use default rules as base
+useDefault = true
+
+# Custom rules for RenderScreenshot API keys
+[[rules]]
+id = "renderscreenshot-live-key"
+description = "RenderScreenshot Live API Key"
+regex = '''rs_live_[a-zA-Z0-9]{20,}'''
+keywords = ["rs_live_"]
+
+[[rules]]
+id = "renderscreenshot-secret-key"
+description = "RenderScreenshot Secret Key"
+regex = '''rs_secret_[a-zA-Z0-9]{20,}'''
+keywords = ["rs_secret_"]
+
+[[rules]]
+id = "renderscreenshot-pub-key"
+description = "RenderScreenshot Public Key"
+regex = '''rs_pub_[a-zA-Z0-9]{20,}'''
+keywords = ["rs_pub_"]
+
+# Allow patterns - safe placeholder values used in docs/tests
+[allowlist]
+description = "Allowlist for safe placeholder values"
+regexTarget = "match"
+regexes = [
+    # Placeholder API keys (xxxxx pattern)
+    '''rs_(live|test|secret|pub)_x{3,}''',
+    # Example keys in documentation
+    '''rs_(live|test|secret|pub)_example[a-zA-Z0-9]*''',
+    # Test keys
+    '''rs_test_[a-zA-Z0-9]+''',
+]
+
+# Paths to exclude
+paths = [
+    '''vendor/.*''',
+    '''\.git/.*''',
+    '''composer\.lock''',
+]
