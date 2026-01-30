@@ -2,9 +2,9 @@
 
 Official PHP SDK for [RenderScreenshot](https://renderscreenshot.com) - Screenshot API for developers.
 
-[![CI](https://github.com/renderscreenshot/rs-php/actions/workflows/ci.yml/badge.svg)](https://github.com/renderscreenshot/rs-php/actions/workflows/ci.yml)
-[![Latest Stable Version](https://poser.pugx.org/renderscreenshot/renderscreenshot/v)](https://packagist.org/packages/renderscreenshot/renderscreenshot)
-[![License](https://poser.pugx.org/renderscreenshot/renderscreenshot/license)](https://packagist.org/packages/renderscreenshot/renderscreenshot)
+[![CI](https://github.com/Render-Screenshot/rs-php/actions/workflows/ci.yml/badge.svg)](https://github.com/Render-Screenshot/rs-php/actions/workflows/ci.yml)
+[![PHP Version](https://img.shields.io/badge/php-%3E%3D8.0-8892BF.svg)](https://php.net/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ## Installation
 
