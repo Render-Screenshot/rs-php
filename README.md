@@ -267,7 +267,7 @@ try {
 
 - [Documentation](https://renderscreenshot.com/docs/sdks/php)
 - [API Reference](https://renderscreenshot.com/docs/endpoints/post-screenshot)
-- [GitHub](https://github.com/renderscreenshot/rs-php)
+- [GitHub](https://github.com/render-screenshot/rs-php)
 
 ## License
 

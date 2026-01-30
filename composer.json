@@ -21,7 +21,7 @@
     "homepage": "https://renderscreenshot.com",
     "support": {
         "docs": "https://renderscreenshot.com/docs/sdks/php",
-        "issues": "https://github.com/renderscreenshot/rs-php/issues"
+        "issues": "https://github.com/render-screenshot/rs-php/issues"
     },
     "require": {
         "php": ">=8.0",
