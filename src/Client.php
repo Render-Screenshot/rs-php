@@ -60,9 +60,9 @@ class Client
     /**
      * Create a new RenderScreenshot client.
      *
-     * @param string           $apiKey     Your API key (rs_live_* or rs_test_*)
-     * @param string|null      $baseUrl    Base URL for the API (optional, defaults to production)
-     * @param float|null       $timeout    Request timeout in seconds (optional, defaults to 30)
+     * @param string            $apiKey     Your API key (rs_live_* or rs_test_*)
+     * @param string|null       $baseUrl    Base URL for the API (optional, defaults to production)
+     * @param float|null        $timeout    Request timeout in seconds (optional, defaults to 30)
      * @param GuzzleClient|null $httpClient Custom Guzzle client for testing (optional)
      *
      * @throws \InvalidArgumentException If API key is empty
@@ -180,9 +180,9 @@ class Client
     /**
      * Handle API error responses.
      *
-     * @param int                            $statusCode HTTP status code
-     * @param string                         $body       Response body
-     * @param array<string, array<string>>   $headers    Response headers
+     * @param int                          $statusCode HTTP status code
+     * @param string                       $body       Response body
+     * @param array<string, array<string>> $headers    Response headers
      *
      * @throws RenderScreenshotException Always raised with error details
      */
@@ -487,7 +487,7 @@ class Client
      * List all available presets.
      *
      * @return array<array{id: string, name: string, description?: string, width: int, height: int, scale?: float, format?: string}>
-     *     List of preset configurations
+     *                                                                                                                               List of preset configurations
      *
      * @example
      * foreach ($client->presets() as $preset) {
@@ -505,7 +505,7 @@ class Client
      * @param string $presetId Preset identifier (e.g., "og_card")
      *
      * @return array{id: string, name: string, description?: string, width: int, height: int, scale?: float, format?: string}
-     *     Preset configuration
+     *                                                                                                                        Preset configuration
      *
      * @throws RenderScreenshotException If the preset is not found
      *
@@ -522,7 +522,7 @@ class Client
      * List all available device presets.
      *
      * @return array<array{id: string, name: string, width: int, height: int, scale: float, mobile: bool, user_agent: string}>
-     *     List of device configurations
+     *                                                                                                                         List of device configurations
      *
      * @example
      * foreach ($client->devices() as $device) {

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace RenderScreenshot\Tests;
 
-use DateTime;
 use PHPUnit\Framework\TestCase;
 use RenderScreenshot\Webhook;
 
