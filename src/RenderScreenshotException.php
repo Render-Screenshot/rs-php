@@ -36,22 +36,22 @@ class RenderScreenshotException extends Exception
     /**
      * HTTP status code from the response.
      */
-    public readonly int $httpStatus;
+    public int $httpStatus;
 
     /**
      * Error code from the API (e.g., "invalid_url", "rate_limited").
      */
-    public readonly string $code;
+    public string $code;
 
     /**
      * Whether this error can be retried.
      */
-    public readonly bool $retryable;
+    public bool $retryable;
 
     /**
      * Seconds to wait before retrying (for rate limits).
      */
-    public readonly ?int $retryAfter;
+    public ?int $retryAfter;
 
     /**
      * Create a new RenderScreenshotException.

@@ -55,7 +55,7 @@ class Client
     /**
      * Cache manager instance.
      */
-    public readonly CacheManager $cache;
+    public CacheManager $cache;
 
     /**
      * Create a new RenderScreenshot client.
@@ -186,7 +186,7 @@ class Client
      *
      * @throws RenderScreenshotException Always raised with error details
      */
-    private function handleError(int $statusCode, string $body, array $headers): never
+    private function handleError(int $statusCode, string $body, array $headers): void
     {
         $retryAfter = null;
         if (isset($headers['Retry-After'][0])) {
