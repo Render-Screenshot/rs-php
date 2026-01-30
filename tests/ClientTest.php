@@ -291,7 +291,7 @@ class ClientTest extends TestCase
             $this->fail('Expected RenderScreenshotException');
         } catch (RenderScreenshotException $e) {
             $this->assertSame(429, $e->httpStatus);
-            $this->assertSame('rate_limited', $e->code);
+            $this->assertSame('rate_limited', $e->errorCode);
             $this->assertSame(60, $e->retryAfter);
             $this->assertTrue($e->retryable);
         }

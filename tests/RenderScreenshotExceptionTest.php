@@ -14,7 +14,7 @@ class RenderScreenshotExceptionTest extends TestCase
         $e = new RenderScreenshotException(400, 'invalid_url', 'Bad URL', 60);
 
         $this->assertSame(400, $e->httpStatus);
-        $this->assertSame('invalid_url', $e->code);
+        $this->assertSame('invalid_url', $e->errorCode);
         $this->assertSame('Bad URL', $e->getMessage());
         $this->assertSame(60, $e->retryAfter);
         $this->assertFalse($e->retryable);
@@ -52,7 +52,7 @@ class RenderScreenshotExceptionTest extends TestCase
         ]);
 
         $this->assertSame(400, $e->httpStatus);
-        $this->assertSame('invalid_url', $e->code);
+        $this->assertSame('invalid_url', $e->errorCode);
         $this->assertSame('The URL is invalid', $e->getMessage());
     }
 
@@ -70,7 +70,7 @@ class RenderScreenshotExceptionTest extends TestCase
     {
         $e = RenderScreenshotException::fromResponse(500, []);
 
-        $this->assertSame('internal_error', $e->code);
+        $this->assertSame('internal_error', $e->errorCode);
         $this->assertSame('An unknown error occurred', $e->getMessage());
     }
 
@@ -90,7 +90,7 @@ class RenderScreenshotExceptionTest extends TestCase
         $e = RenderScreenshotException::invalidUrl('not-a-url');
 
         $this->assertSame(400, $e->httpStatus);
-        $this->assertSame('invalid_url', $e->code);
+        $this->assertSame('invalid_url', $e->errorCode);
         $this->assertStringContainsString('not-a-url', $e->getMessage());
     }
 
@@ -99,7 +99,7 @@ class RenderScreenshotExceptionTest extends TestCase
         $e = RenderScreenshotException::invalidRequest('Missing required field');
 
         $this->assertSame(400, $e->httpStatus);
-        $this->assertSame('invalid_request', $e->code);
+        $this->assertSame('invalid_request', $e->errorCode);
         $this->assertSame('Missing required field', $e->getMessage());
     }
 
@@ -108,7 +108,7 @@ class RenderScreenshotExceptionTest extends TestCase
         $e = RenderScreenshotException::unauthorized();
 
         $this->assertSame(401, $e->httpStatus);
-        $this->assertSame('unauthorized', $e->code);
+        $this->assertSame('unauthorized', $e->errorCode);
         $this->assertStringContainsString('API key', $e->getMessage());
     }
 
@@ -116,7 +116,7 @@ class RenderScreenshotExceptionTest extends TestCase
     {
         $e = RenderScreenshotException::forbidden();
         $this->assertSame(403, $e->httpStatus);
-        $this->assertSame('forbidden', $e->code);
+        $this->assertSame('forbidden', $e->errorCode);
         $this->assertSame('Access denied', $e->getMessage());
 
         $e2 = RenderScreenshotException::forbidden('Custom message');
@@ -127,7 +127,7 @@ class RenderScreenshotExceptionTest extends TestCase
     {
         $e = RenderScreenshotException::notFound();
         $this->assertSame(404, $e->httpStatus);
-        $this->assertSame('not_found', $e->code);
+        $this->assertSame('not_found', $e->errorCode);
         $this->assertSame('Resource not found', $e->getMessage());
 
         $e2 = RenderScreenshotException::notFound('Preset not found');
@@ -138,7 +138,7 @@ class RenderScreenshotExceptionTest extends TestCase
     {
         $e = RenderScreenshotException::rateLimited();
         $this->assertSame(429, $e->httpStatus);
-        $this->assertSame('rate_limited', $e->code);
+        $this->assertSame('rate_limited', $e->errorCode);
         $this->assertTrue($e->retryable);
         $this->assertNull($e->retryAfter);
 
@@ -151,7 +151,7 @@ class RenderScreenshotExceptionTest extends TestCase
         $e = RenderScreenshotException::timeout();
 
         $this->assertSame(408, $e->httpStatus);
-        $this->assertSame('timeout', $e->code);
+        $this->assertSame('timeout', $e->errorCode);
         $this->assertTrue($e->retryable);
     }
 
@@ -159,7 +159,7 @@ class RenderScreenshotExceptionTest extends TestCase
     {
         $e = RenderScreenshotException::renderFailed();
         $this->assertSame(500, $e->httpStatus);
-        $this->assertSame('render_failed', $e->code);
+        $this->assertSame('render_failed', $e->errorCode);
         $this->assertTrue($e->retryable);
 
         $e2 = RenderScreenshotException::renderFailed('Page crashed');
@@ -170,7 +170,7 @@ class RenderScreenshotExceptionTest extends TestCase
     {
         $e = RenderScreenshotException::internal();
         $this->assertSame(500, $e->httpStatus);
-        $this->assertSame('internal_error', $e->code);
+        $this->assertSame('internal_error', $e->errorCode);
         $this->assertTrue($e->retryable);
 
         $e2 = RenderScreenshotException::internal('Database error');

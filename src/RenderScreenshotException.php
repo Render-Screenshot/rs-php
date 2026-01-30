@@ -41,7 +41,7 @@ class RenderScreenshotException extends Exception
     /**
      * Error code from the API (e.g., "invalid_url", "rate_limited").
      */
-    public string $code;
+    public string $errorCode;
 
     /**
      * Whether this error can be retried.
@@ -69,7 +69,7 @@ class RenderScreenshotException extends Exception
     ) {
         parent::__construct($message);
         $this->httpStatus = $httpStatus;
-        $this->code = $code;
+        $this->errorCode = $code;
         $this->retryable = in_array($code, self::RETRYABLE_ERRORS, true);
         $this->retryAfter = $retryAfter;
     }
@@ -79,7 +79,7 @@ class RenderScreenshotException extends Exception
      */
     public function __toString(): string
     {
-        $parts = ["[{$this->code}] {$this->message}"];
+        $parts = ["[{$this->errorCode}] {$this->message}"];
         if ($this->retryAfter !== null) {
             $parts[] = " (retry after {$this->retryAfter}s)";
         }

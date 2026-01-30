@@ -251,7 +251,7 @@ try {
     $client->take(TakeOptions::url('https://example.com'));
 } catch (RenderScreenshotException $e) {
     echo $e->httpStatus;   // 400, 429, etc.
-    echo $e->code;         // 'invalid_url', 'rate_limited'
+    echo $e->errorCode;    // 'invalid_url', 'rate_limited'
     echo $e->message;      // Human-readable message
     echo $e->retryable;    // true/false
     echo $e->retryAfter;   // Seconds (for rate limits)
