@@ -165,8 +165,8 @@ class Client
         } catch (ConnectException $e) {
             throw RenderScreenshotException::timeout();
         } catch (RequestException $e) {
-            if ($e->hasResponse()) {
-                $response = $e->getResponse();
+            $response = $e->getResponse();
+            if ($response !== null) {
                 $this->handleError(
                     $response->getStatusCode(),
                     $response->getBody()->getContents(),
@@ -329,6 +329,7 @@ class Client
             ? $options->toParams()
             : TakeOptions::fromConfig($options)->toParams();
 
+        /** @var string */
         return $this->request('POST', '/screenshot', $params, 'buffer');
     }
 
@@ -366,6 +367,7 @@ class Client
 
         $params['response_type'] = 'json';
 
+        /** @var array<string, mixed> */
         return $this->request('POST', '/screenshot', $params);
     }
 
@@ -420,6 +422,7 @@ class Client
             'options' => $opts,
         ];
 
+        /** @var array<string, mixed> */
         return $this->request('POST', '/batch', $body);
     }
 
@@ -454,6 +457,7 @@ class Client
             $formattedRequests[] = array_merge(['url' => $req['url']], $params);
         }
 
+        /** @var array<string, mixed> */
         return $this->request('POST', '/batch', ['requests' => $formattedRequests]);
     }
 
@@ -480,14 +484,14 @@ class Client
      */
     public function getBatch(string $batchId): array
     {
+        /** @var array<string, mixed> */
         return $this->request('GET', "/batch/{$batchId}");
     }
 
     /**
      * List all available presets.
      *
-     * @return array<array{id: string, name: string, description?: string, width: int, height: int, scale?: float, format?: string}>
-     *                                                                                                                               List of preset configurations
+     * @return array<int, array<string, mixed>> List of preset configurations
      *
      * @example
      * foreach ($client->presets() as $preset) {
@@ -496,6 +500,7 @@ class Client
      */
     public function presets(): array
     {
+        /** @var array<int, array<string, mixed>> */
         return $this->request('GET', '/presets');
     }
 
@@ -504,8 +509,7 @@ class Client
      *
      * @param string $presetId Preset identifier (e.g., "og_card")
      *
-     * @return array{id: string, name: string, description?: string, width: int, height: int, scale?: float, format?: string}
-     *                                                                                                                        Preset configuration
+     * @return array<string, mixed> Preset configuration
      *
      * @throws RenderScreenshotException If the preset is not found
      *
@@ -515,14 +519,14 @@ class Client
      */
     public function preset(string $presetId): array
     {
+        /** @var array<string, mixed> */
         return $this->request('GET', "/presets/{$presetId}");
     }
 
     /**
      * List all available device presets.
      *
-     * @return array<array{id: string, name: string, width: int, height: int, scale: float, mobile: bool, user_agent: string}>
-     *                                                                                                                         List of device configurations
+     * @return array<int, array<string, mixed>> List of device configurations
      *
      * @example
      * foreach ($client->devices() as $device) {
@@ -531,6 +535,7 @@ class Client
      */
     public function devices(): array
     {
+        /** @var array<int, array<string, mixed>> */
         return $this->request('GET', '/devices');
     }
 }

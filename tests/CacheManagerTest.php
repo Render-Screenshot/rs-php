@@ -21,8 +21,8 @@ class CacheManagerTest extends TestCase
     /**
      * Create a client with a mock handler.
      *
-     * @param array<Response> $responses Responses to return
-     * @param array<array>    $container Reference to capture requests
+     * @param array<Response>                  $responses Responses to return
+     * @param array<int, array<string, mixed>> $container Reference to capture requests
      */
     private function createMockClient(array $responses, array &$container = []): Client
     {

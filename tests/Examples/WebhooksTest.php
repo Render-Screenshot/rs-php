@@ -14,10 +14,21 @@ class WebhooksTest extends TestCase
 {
     private const WEBHOOK_SECRET = 'whsec_test_secret';
 
+    /**
+     * @param array<string, mixed> $data
+     */
+    private static function jsonEncode(array $data): string
+    {
+        $json = json_encode($data);
+        assert($json !== false);
+
+        return $json;
+    }
+
     public function testVerifyAndParseWebhook(): void
     {
         // Simulate incoming webhook
-        $payload = json_encode([
+        $payload = self::jsonEncode([
             'id' => 'evt_123',
             'event' => 'screenshot.completed',
             'timestamp' => '2024-01-15T10:30:00Z',

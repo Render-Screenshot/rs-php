@@ -57,6 +57,7 @@ class CacheManager
     public function get(string $key): ?string
     {
         try {
+            /** @var string */
             return $this->client->request('GET', "/cache/{$key}", null, 'buffer');
         } catch (RenderScreenshotException $e) {
             if ($e->httpStatus === 404) {
@@ -98,6 +99,7 @@ class CacheManager
      */
     public function purge(array $keys): array
     {
+        /** @var array{purged: int, keys: array<string>} */
         return $this->client->request('POST', '/cache/purge', ['keys' => $keys]);
     }
 
@@ -114,6 +116,7 @@ class CacheManager
      */
     public function purgeUrl(string $pattern): array
     {
+        /** @var array{purged: int, keys: array<string>} */
         return $this->client->request('POST', '/cache/purge', ['url' => $pattern]);
     }
 
@@ -130,6 +133,7 @@ class CacheManager
      */
     public function purgeBefore(DateTimeInterface $date): array
     {
+        /** @var array{purged: int, keys: array<string>} */
         return $this->client->request('POST', '/cache/purge', ['before' => $date->format('c')]);
     }
 
@@ -146,6 +150,7 @@ class CacheManager
      */
     public function purgePattern(string $pattern): array
     {
+        /** @var array{purged: int, keys: array<string>} */
         return $this->client->request('POST', '/cache/purge', ['pattern' => $pattern]);
     }
 }

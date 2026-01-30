@@ -18,6 +18,17 @@ use RenderScreenshot\TakeOptions;
  */
 class QuickStartTest extends TestCase
 {
+    /**
+     * @param array<string, mixed> $data
+     */
+    private static function jsonEncode(array $data): string
+    {
+        $json = json_encode($data);
+        assert($json !== false);
+
+        return $json;
+    }
+
     private function createMockClient(Response $response): Client
     {
         $mock = new MockHandler([$response]);
@@ -100,7 +111,7 @@ class QuickStartTest extends TestCase
             'size' => 12345,
             'cached' => false,
         ];
-        $client = $this->createMockClient(new Response(200, [], json_encode($responseData)));
+        $client = $this->createMockClient(new Response(200, [], self::jsonEncode($responseData)));
 
         $response = $client->takeJson(
             TakeOptions::url('https://example.com')->preset('og_card')

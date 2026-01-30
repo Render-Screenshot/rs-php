@@ -17,6 +17,17 @@ use RenderScreenshot\TakeOptions;
  */
 class BatchTest extends TestCase
 {
+    /**
+     * @param array<string, mixed> $data
+     */
+    private static function jsonEncode(array $data): string
+    {
+        $json = json_encode($data);
+        assert($json !== false);
+
+        return $json;
+    }
+
     private function createMockClient(Response $response): Client
     {
         $mock = new MockHandler([$response]);
@@ -40,7 +51,7 @@ class BatchTest extends TestCase
                 ['url' => 'https://example3.com', 'success' => true],
             ],
         ];
-        $client = $this->createMockClient(new Response(200, [], json_encode($responseData)));
+        $client = $this->createMockClient(new Response(200, [], self::jsonEncode($responseData)));
 
         // Simple batch with shared options
         $results = $client->batch(
@@ -63,7 +74,7 @@ class BatchTest extends TestCase
             'failed' => 0,
             'results' => [],
         ];
-        $client = $this->createMockClient(new Response(200, [], json_encode($responseData)));
+        $client = $this->createMockClient(new Response(200, [], self::jsonEncode($responseData)));
 
         // Advanced batch with per-URL options
         $results = $client->batchAdvanced([
@@ -78,7 +89,7 @@ class BatchTest extends TestCase
     public function testBatchPolling(): void
     {
         // First call: processing
-        $processingResponse = new Response(200, [], json_encode([
+        $processingResponse = new Response(200, [], self::jsonEncode([
             'id' => 'batch_789',
             'status' => 'processing',
             'total' => 10,
@@ -88,7 +99,7 @@ class BatchTest extends TestCase
         ]));
 
         // Second call: completed
-        $completedResponse = new Response(200, [], json_encode([
+        $completedResponse = new Response(200, [], self::jsonEncode([
             'id' => 'batch_789',
             'status' => 'completed',
             'total' => 10,
