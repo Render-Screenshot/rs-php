@@ -46,9 +46,9 @@ class BatchTest extends TestCase
             'completed' => 3,
             'failed' => 0,
             'results' => [
-                ['url' => 'https://example1.com', 'success' => true],
-                ['url' => 'https://example2.com', 'success' => true],
-                ['url' => 'https://example3.com', 'success' => true],
+                ['url' => 'https://example1.com', 'status' => 'completed', 'image' => ['image_url' => 'https://cdn.example.com/a.png'], 'error' => null],
+                ['url' => 'https://example2.com', 'status' => 'completed', 'image' => ['image_url' => 'https://cdn.example.com/a.png'], 'error' => null],
+                ['url' => 'https://example3.com', 'status' => 'completed', 'image' => ['image_url' => 'https://cdn.example.com/a.png'], 'error' => null],
             ],
         ];
         $client = $this->createMockClient(new Response(200, [], self::jsonEncode($responseData)));
@@ -62,6 +62,52 @@ class BatchTest extends TestCase
         $this->assertSame('batch_123', $results['id']);
         $this->assertSame(3, $results['total']);
         $this->assertSame(3, $results['completed']);
+    }
+
+    public function testBatchCompletedAndFailedItems(): void
+    {
+        $responseData = [
+            'id' => 'batch_789',
+            'status' => 'completed',
+            'total' => 2,
+            'completed' => 1,
+            'failed' => 1,
+            'results' => [
+                [
+                    'position' => 0,
+                    'url' => 'https://github.com',
+                    'status' => 'completed',
+                    'image' => ['image_url' => 'https://cdn.example.com/1.png', 'width' => 1200, 'height' => 630],
+                    'error' => null,
+                ],
+                [
+                    'position' => 1,
+                    'url' => 'https://broken.example',
+                    'status' => 'failed',
+                    'image' => null,
+                    'error' => 'Page failed to load within 30 seconds',
+                ],
+            ],
+            'usage' => ['credits' => 1, 'remaining' => 99],
+        ];
+        $client = $this->createMockClient(new Response(200, [], self::jsonEncode($responseData)));
+
+        $results = $client->batch(['https://github.com', 'https://broken.example']);
+
+        // From docs: batch.html.markerb - Simple Batch
+        $urls = [];
+        foreach ($results['results'] as $item) {
+            $urls[$item['url']] = $item['status'] === 'completed' && $item['image'] !== null
+                ? $item['image']['image_url']
+                : 'failed';
+        }
+
+        $this->assertSame([
+            'https://github.com' => 'https://cdn.example.com/1.png',
+            'https://broken.example' => 'failed',
+        ], $urls);
+        $this->assertSame(1, $results['completed']);
+        $this->assertSame(1, $results['failed']);
     }
 
     public function testAdvancedBatch(): void

@@ -397,7 +397,16 @@ class Client
      *     total: int,
      *     completed: int,
      *     failed: int,
-     *     results: array<array{url: string, success: bool, response?: array<string, mixed>, error?: array<string, mixed>}>
+     *     progress?: float,
+     *     results: list<array{
+     *         position?: int,
+     *         url: string,
+     *         status: string,
+     *         image: array{image_url: string, width?: int, height?: int, size?: int, format?: string}|null,
+     *         error: string|null,
+     *         response_time_ms?: int|null
+     *     }>,
+     *     usage?: array{credits: int, remaining: int}
      * } Batch response with results for each URL
      *
      * @throws RenderScreenshotException If the batch request fails
@@ -437,7 +446,16 @@ class Client
      *     total: int,
      *     completed: int,
      *     failed: int,
-     *     results: array<array{url: string, success: bool, response?: array<string, mixed>, error?: array<string, mixed>}>
+     *     progress?: float,
+     *     results: list<array{
+     *         position?: int,
+     *         url: string,
+     *         status: string,
+     *         image: array{image_url: string, width?: int, height?: int, size?: int, format?: string}|null,
+     *         error: string|null,
+     *         response_time_ms?: int|null
+     *     }>,
+     *     usage?: array{credits: int, remaining: int}
      * } Batch response with results for each URL
      *
      * @throws RenderScreenshotException If the batch request fails
@@ -472,7 +490,16 @@ class Client
      *     total: int,
      *     completed: int,
      *     failed: int,
-     *     results: array<array{url: string, success: bool, response?: array<string, mixed>, error?: array<string, mixed>}>
+     *     progress?: float,
+     *     results: list<array{
+     *         position?: int,
+     *         url: string,
+     *         status: string,
+     *         image: array{image_url: string, width?: int, height?: int, size?: int, format?: string}|null,
+     *         error: string|null,
+     *         response_time_ms?: int|null
+     *     }>,
+     *     usage?: array{credits: int, remaining: int}
      * } Batch status and results
      *
      * @throws RenderScreenshotException If the batch is not found

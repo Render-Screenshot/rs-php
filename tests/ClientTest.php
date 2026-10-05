@@ -143,8 +143,8 @@ class ClientTest extends TestCase
             'completed' => 2,
             'failed' => 0,
             'results' => [
-                ['url' => 'https://example1.com', 'success' => true],
-                ['url' => 'https://example2.com', 'success' => true],
+                ['url' => 'https://example1.com', 'status' => 'completed', 'image' => ['image_url' => 'https://cdn.example.com/a.png'], 'error' => null],
+                ['url' => 'https://example2.com', 'status' => 'completed', 'image' => ['image_url' => 'https://cdn.example.com/a.png'], 'error' => null],
             ],
         ];
         $container = [];
