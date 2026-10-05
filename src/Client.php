@@ -30,7 +30,7 @@ class Client
     private const DEFAULT_BASE_URL = 'https://api.renderscreenshot.com';
     private const DEFAULT_TIMEOUT = 30.0;
     private const API_VERSION = 'v1';
-    private const SDK_VERSION = '1.0.0';
+    private const SDK_VERSION = '1.1.0';
 
     /**
      * API key for authentication.
